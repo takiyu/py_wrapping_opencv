@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.7)
+cmake_minimum_required(VERSION 3.5.1)
 
 project(boost_cv_sample CXX C)
 set (CMAKE_CXX_STANDARD 11)  # C++ 11
@@ -15,10 +15,14 @@ set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wdeprecated-declarations -fpermissive"
 
 # External libraries
 find_package(OpenCV REQUIRED)
-find_package(Boost REQUIRED COMPONENTS python3)
 find_package(PythonLibs 3 REQUIRED)
 find_package(PythonInterp 3 REQUIRED)
 find_package(NumPy REQUIRED)
+find_package(Boost COMPONENTS python3)
+if (NOT ${Boost_FOUND})
+    find_package(Boost REQUIRED COMPONENTS python-py35)  # For Ubuntu
+endif()
+
 include_directories(${OpenCV_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS}
                     ${PYTHON_INCLUDE_DIRS} ${NUMPY_INCLUDE_DIR})
 set(EXTRA_LIBS ${OpenCV_LIBS} ${Boost_LIBRARIES} ${PYTHON_LIBRARIES})
