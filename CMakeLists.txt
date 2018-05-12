@@ -28,5 +28,5 @@ include_directories(${OpenCV_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS}
 set(EXTRA_LIBS ${OpenCV_LIBS} ${Boost_LIBRARIES} ${PYTHON_LIBRARIES})
 
 # Building libraries
-add_library(boost_cv_sample SHARED boost_cv_sample.cpp)
+add_library(boost_cv_sample SHARED src/boost_cv_sample.cpp)
 target_link_libraries(boost_cv_sample ${EXTRA_LIBS})
