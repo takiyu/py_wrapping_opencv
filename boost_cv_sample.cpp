@@ -14,8 +14,16 @@ PyObject* GenRects(int n) {
     return pyopencv_from(rects);
 }
 
+PyObject* FillOne(PyObject* o) {
+    cv::Mat cv_img;
+    pyopencv_to(o, cv_img);
+    cv_img.setTo(cv::Scalar(1));
+    return pyopencv_from(cv_img);
+}
+
 BOOST_PYTHON_MODULE(libboost_cv_sample) {
     import_array();
     boost::python::def("gen_image", &GenImage);
     boost::python::def("gen_rects", &GenRects);
+    boost::python::def("fill_one", &FillOne);
 }
